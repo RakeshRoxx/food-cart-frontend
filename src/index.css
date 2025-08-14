@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+/* Toggle Switch Styles */
+.toggle__line {
+    width: 3rem;
+    /* w-12 */
+    height: 1.5rem;
+    /* h-6 */
+    border-radius: 9999px;
+    /* rounded-full */
+}
+
+.toggle__dot {
+    width: 1.25rem;
+    /* w-5 */
+    height: 1.25rem;
+    /* h-5 */
+    background-color: white;
+    border-radius: 9999px;
+    /* rounded-full */
+    top: 0.25rem;
+    /* inset-y-0.5 */
+}
+
+/* Custom Animations */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+@keyframes fade-in-scale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fade-in-scale {
+    animation: fade-in-scale 0.2s ease-out forwards;
+}
