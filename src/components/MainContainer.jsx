@@ -4,7 +4,6 @@ const MainContainer = () => {
 
     return (
         <MainScreen />
-
     );
 };
 export default MainContainer;

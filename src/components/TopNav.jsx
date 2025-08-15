@@ -1,22 +1,17 @@
-import { useState } from "react";
 import {
+    ChevronRight,
+    Moon,
     Search,
-    User,
     ShoppingCart,
     Sun,
-    Moon,
-    ChevronRight,
+    User,
     X
 } from 'lucide-react';
+import { useState } from "react";
 
 function TopNav() {
-
-
-
     const [isDarkMode, setIsDarkMode] = useState(false);
-
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-
     const [cartItems, setCartItems] = useState([]);
     const [showCart, setShowCart] = useState(false);
 

@@ -1,5 +1,3 @@
-
-
 const HeroBanner = () => {
     return (
         <>

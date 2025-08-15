@@ -1,5 +1,6 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
-import { useEffect } from "react";
+import RestaurantMain from "./components/Restaurant/RestaurantMain";
 
 function App() {
   // console.log("env data", import.meta.env)
@@ -44,9 +45,22 @@ function App() {
   // }, []);
 
 
+  // Create the react router 
+
+  const AppRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <MainContainer />
+    }, {
+      path: "/restaurant",
+      element: <RestaurantMain />
+    }
+  ])
+
+
   return (
     <>
-      <MainContainer />
+      <RouterProvider router={AppRouter} />
     </>
   )
 }
