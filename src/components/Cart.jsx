@@ -45,7 +45,7 @@ const Cart = () => {
                                         <div>
                                             <p className="font-semibold text-white text-lg">{item.name}</p>
                                             <p className="text-sm text-gray-600 dark:text-gray-400">{item.restaurantName}</p>
-                                            <p className="text-base font-bold text-red-600 dark:text-red-400">${item.price.toFixed(2)}</p>
+                                            <p className="text-base font-bold text-red-600 dark:text-red-400">Rs {item.price.toFixed(2)}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center space-x-2">
@@ -82,7 +82,7 @@ const Cart = () => {
             <div className="absolute bottom-0 w-full p-4 md:p-6 border-t border-red-100 dark:border-red-900 bg-red-50 dark:bg-gray-900 shadow-t-lg">
                 <div className="flex justify-between items-center text-xl md:text-2xl font-extrabold mb-4 text-red-700 dark:text-red-300">
                     <span>Total:</span>
-                    <span>${totalCartPrice.toFixed(2)}</span>
+                    <span>Rs  {totalCartPrice.toFixed(2)}</span>
                 </div>
                 <button className="w-full py-3 md:py-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl text-lg font-bold shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-103 active:scale-98">
                     Proceed to Checkout

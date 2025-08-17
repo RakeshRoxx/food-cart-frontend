@@ -25,7 +25,7 @@ const DishDetails = (props) => {
                 <div className="flex items-center space-x-4 mb-4">
                     <img src={selectedDishForDetails.imageUrl} alt={selectedDishForDetails.name} className="w-24 h-24 rounded-lg object-cover border border-gray-200 dark:border-gray-700" />
                     <div>
-                        <p className="text-lg font-semibold">${selectedDishForDetails.price.toFixed(2)}</p>
+                        <p className="text-lg font-semibold">Rs.{selectedDishForDetails.price.toFixed(2)}</p>
                         <p className="text-gray-600 dark:text-gray-400">Cuisine: {selectedDishForDetails.restaurantCuisine}</p>
                         {selectedDishForDetails.isVeg && <p className="text-red-600 dark:text-red-400 flex items-center mt-1"><Salad className="inline-block w-5 h-5 mr-1" />Vegetarian</p>}
                     </div>
