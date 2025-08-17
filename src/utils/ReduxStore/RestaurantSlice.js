@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const RestaurantSlice = createSlice({
-    name: "Restaurant",
-    initialState: {
-        restaurant: null
-    },
+    name: "restaurant",
+    initialState: null,
     reducers: {
         saveRestaurantDetails: (state, action) => {
-            state.restaurant = action.payload;
+            return action.payload;
         }
     }
 });
