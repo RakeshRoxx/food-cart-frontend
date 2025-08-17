@@ -4,7 +4,7 @@ const RestaurantMain = () => {
 
     const navigate = useNavigate();
 
-    const backToHome = (e) => {
+    const backToHome = () => {
         navigate("/");
     }
 

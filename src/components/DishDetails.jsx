@@ -9,7 +9,7 @@ const DishDetails = (props) => {
     const [dishDescription, setDishDescription] = useState('');
 
     const generateDishDescription = () => {
-        console.log("Generating GEMINI");;
+        console.log("Generating GEMINI");
 
     }
     return (

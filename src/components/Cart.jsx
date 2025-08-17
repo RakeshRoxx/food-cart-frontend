@@ -1,17 +1,25 @@
 import { ChevronRight, Minus, Plus, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCartState } from "../utils/ReduxStore/CartSlice";
+import { removeFromCart, toggleCartState, updateItemQuantity } from "../utils/ReduxStore/CartSlice";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const cartStateSelector = useSelector((store) => store?.cart?.cartState);
-    const cartItems = useSelector((store) => store?.cart?.list);
+    const cartItems = useSelector((store) => store?.cart?.items);
     let totalCartPrice = 0;
 
-    if (cartItems) {
+    // Function to adjust item quantity in cart
+    const updateQuantity = (itemId, restaurantName, delta) => {
+        dispatch(updateItemQuantity({ itemId, restaurantName, value: delta }))
+    };
 
+    if (cartItems) {
         totalCartPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    }
+    };
+
+    const removeItemFromCart = (itemId, restaurantName) => {
+        dispatch(removeFromCart({ itemId, restaurantName }));
+    };
 
 
     return (
@@ -28,37 +36,47 @@ const Cart = () => {
                 {cartItems && cartItems.length === 0 ? (
                     <p className="text-center text-gray-500 dark:text-gray-400 mt-10 text-lg">Your cart is empty. Start adding some delicious items!</p>
                 ) : (
-                    <ul className="space-y-4">
+                    <div className="space-y-4">
                         {cartItems && cartItems.map(item => (
-                            <li key={`${item.id}-${item.restaurantName}`} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                                <div className="flex items-center space-x-3">
-                                    <img src={item.imageUrl} alt={item.name} className="w-16 h-16 rounded-lg object-cover border border-gray-200 dark:border-gray-600" />
-                                    <div>
-                                        <p className="font-semibold text-lg">{item.name}</p>
-                                        <p className="text-sm text-gray-600 dark:text-gray-400">{item.restaurantName}</p>
-                                        <p className="text-base font-bold text-red-600 dark:text-red-400">${item.price.toFixed(2)}</p>
+                            <div key={item.id} className="flex flex-col justify-center">
+                                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                                    <div className="flex items-center space-x-3">
+                                        <img src={item.imageUrl} alt={item.name} className="w-16 h-16 rounded-lg object-cover border border-gray-200 dark:border-gray-600" />
+                                        <div>
+                                            <p className="font-semibold text-white text-lg">{item.name}</p>
+                                            <p className="text-sm text-gray-600 dark:text-gray-400">{item.restaurantName}</p>
+                                            <p className="text-base font-bold text-red-600 dark:text-red-400">${item.price.toFixed(2)}</p>
+                                        </div>
                                     </div>
+                                    <div className="flex items-center space-x-2">
+                                        <button
+                                            onClick={() => updateQuantity(item.id, item.restaurantName, -1)}
+                                            className="w-8 h-8 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full flex items-center justify-center text-xl font-bold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+                                            aria-label="Decrease quantity"
+                                        >
+                                            <Minus className="w-4 h-4" />
+                                        </button>
+                                        <span className="font-bold text-white text-lg">{item.quantity}</span>
+                                        <button
+                                            onClick={() => updateQuantity(item.id, item.restaurantName, 1)}
+                                            className="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-xl font-bold hover:bg-red-600 transition-colors duration-200"
+                                            aria-label="Increase quantity"
+                                        >
+                                            <Plus className="w-4 h-4" />
+                                        </button>
+                                    </div>
+
                                 </div>
-                                <div className="flex items-center space-x-2">
-                                    <button
-                                        onClick={() => updateQuantity(item.id, item.restaurantName, -1)}
-                                        className="w-8 h-8 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full flex items-center justify-center text-xl font-bold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
-                                        aria-label="Decrease quantity"
-                                    >
-                                        <Minus className="w-4 h-4" />
-                                    </button>
-                                    <span className="font-bold text-lg">{item.quantity}</span>
-                                    <button
-                                        onClick={() => updateQuantity(item.id, item.restaurantName, 1)}
-                                        className="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-xl font-bold hover:bg-red-600 transition-colors duration-200"
-                                        aria-label="Increase quantity"
-                                    >
-                                        <Plus className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </li>
+                                <button
+                                    onClick={() => removeItemFromCart(item.id, item.restaurantName)}
+                                    className="text-white flex justify-center bg-red-400 mt-0.5 rounded-full hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1"
+                                >
+                                    Remove
+                                </button>
+
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 )}
             </div>
             <div className="absolute bottom-0 w-full p-4 md:p-6 border-t border-red-100 dark:border-red-900 bg-red-50 dark:bg-gray-900 shadow-t-lg">

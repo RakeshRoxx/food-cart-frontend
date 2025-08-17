@@ -1,31 +1,30 @@
 import { Plus, Salad } from "lucide-react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../utils/ReduxStore/CartSlice";
 import DishDetails from "./DishDetails";
 
-
 const RestaurantCard = (props) => {
-    console.log("RestaurantCard Rendered");
-
     const { item, restaurant } = props;
     const [selectedDishForDetails, setSelectedDishForDetails] = useState(null);
+    const dispatch = useDispatch();
 
-    // let item = props?.item;
     // Function to handle opening dish details modal
     const openDishDetails = (item, restaurantCuisine) => {
-        console.log("openDishDetails called");
-        console.log(restaurantCuisine);
-
-
         setSelectedDishForDetails({ ...item, restaurantCuisine });
-        // setDishDescription(''); // Clear previous description
-        // setIsGeneratingDescription(false); // Reset loading state
     };
 
     // Function to close dish details modal
     const closeDishDetails = () => {
         setSelectedDishForDetails(null);
-        // setDishDescription('');
     };
+
+
+    const addItemToCart = (item, restaurantName) => {
+        dispatch(addToCart({ ...item, restaurantName }));
+    };
+
+
     return (
         <>
             {selectedDishForDetails != null ? <DishDetails selectedDishForDetails={selectedDishForDetails} closeDishDetails={closeDishDetails} /> : ""}
@@ -39,7 +38,7 @@ const RestaurantCard = (props) => {
                 </div>
                 <div className="flex flex-col space-y-2">
                     <button
-                        onClick={() => addToCart(item, restaurant.name)}
+                        onClick={() => addItemToCart(item, restaurant.name)}
                         className="px-4 py-2 bg-red-500 text-white text-sm rounded-full shadow-md hover:bg-red-600 transition-colors duration-200 transform hover:scale-105 active:scale-95"
                     >
                         Add <Plus className="inline-block w-4 h-4" />

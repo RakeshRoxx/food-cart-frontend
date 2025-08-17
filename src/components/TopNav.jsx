@@ -14,47 +14,14 @@ import Cart from './Cart';
 function TopNav() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
-    // const [showCart, setShowCart] = useState(false);
+    // const [cartItems, setCartItems] = useState([]);
     const cartStateSelector = useSelector((store) => store?.cart?.cartState);
+    const cartItems = useSelector((store) => store?.cart?.items);
     const dispatch = useDispatch();
 
     const showCart = () => {
         dispatch(toggleCartState());
     }
-
-
-    // Function to add item to cart
-    const addToCart = (item, restaurantName) => {
-        setCartItems(prevItems => {
-            const existingItemIndex = prevItems.findIndex(
-                cartItem => cartItem.id === item.id && cartItem.restaurantName === restaurantName
-            );
-
-            if (existingItemIndex > -1) {
-                const updatedItems = [...prevItems];
-                updatedItems[existingItemIndex].quantity += 1;
-                return updatedItems;
-            } else {
-                return [...prevItems, { ...item, quantity: 1, restaurantName }];
-            }
-        });
-        setShowCart(true); // Show cart when an item is added
-    };
-
-    // Function to adjust item quantity in cart
-    const updateQuantity = (itemId, restaurantName, delta) => {
-        setCartItems(prevItems => {
-            const updatedItems = prevItems.map(item => {
-                if (item.id === itemId && item.restaurantName === restaurantName) {
-                    const newQuantity = item.quantity + delta;
-                    return newQuantity > 0 ? { ...item, quantity: newQuantity } : null;
-                }
-                return item;
-            }).filter(Boolean); // Remove nulls (items with quantity 0)
-            return updatedItems;
-        });
-    };
 
     // Calculate total cart price
 
@@ -127,8 +94,8 @@ function TopNav() {
                         >
                             <ShoppingCart className="w-5 h-5" />
                             {cartItems.length > 0 && (
-                                <span className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full text-xs text-white flex items-center justify-center font-bold border-2 border-white dark:border-gray-900 animate-pulse">
-                                    {cartItems.reduce((total, item) => total + item.quantity, 0)}
+                                <span className="absolute -top-1 -right-1 h-5 w-5 bg-amber-200 rounded-full text-xs text-red-500 flex items-center justify-center font-bold border-2 border-white dark:border-gray-900">
+                                    {cartItems?.length}
                                 </span>
                             )}
                         </button>
