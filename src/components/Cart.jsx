@@ -1,11 +1,13 @@
 import { ChevronRight, Minus, Plus, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { removeFromCart, toggleCartState, updateItemQuantity } from "../utils/ReduxStore/CartSlice";
 
 const Cart = () => {
     const dispatch = useDispatch();
     const cartStateSelector = useSelector((store) => store?.cart?.cartState);
     const cartItems = useSelector((store) => store?.cart?.items);
+    const navigate = useNavigate();
     let totalCartPrice = 0;
 
     // Function to adjust item quantity in cart
@@ -19,6 +21,11 @@ const Cart = () => {
 
     const removeItemFromCart = (itemId, restaurantName) => {
         dispatch(removeFromCart({ itemId, restaurantName }));
+    };
+
+    const checkout = () => {
+        console.log("Checkout the Order");
+        navigate("/track-order");
     };
 
 
@@ -84,7 +91,7 @@ const Cart = () => {
                     <span>Total:</span>
                     <span>Rs  {totalCartPrice.toFixed(2)}</span>
                 </div>
-                <button className="w-full py-3 md:py-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl text-lg font-bold shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-103 active:scale-98">
+                <button onClick={() => checkout()} className="w-full py-3 md:py-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl text-lg font-bold shadow-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-103 active:scale-98">
                     Proceed to Checkout
                     <ChevronRight className="inline-block w-5 h-5 ml-2 -mb-0.5" />
                 </button>

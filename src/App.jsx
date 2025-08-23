@@ -1,11 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
+import Delivery from "./components/Order/Delivery";
+import DeliveryTrackingPage from "./components/Order/DeliveryGoogle";
+import TrackOrder from "./components/Order/TrackOrder";
 import RestaurantMain from "./components/Restaurant/RestaurantMain";
 
 function App() {
-  // console.log("env data", import.meta.env)
   // const sendLocation = async (coords) => {
-  //   // const backend_url = import.meta.env.BACKEND_HOST_URL;
+  //   const backend_url = import.meta.env.VITE_BACKEND_HOST_URL;
   //   console.log(coords);
 
   //   const res = await fetch(`http://localhost:8001/restaurant/send/location`, {
@@ -54,6 +56,18 @@ function App() {
     }, {
       path: "/restaurant",
       element: <RestaurantMain />
+    },
+    {
+      path: "/track-order",
+      element: <TrackOrder />
+    },
+    {
+      path: "/delivery",
+      element: <Delivery />
+    },
+    {
+      path: "/google",
+      element: <DeliveryTrackingPage deliveryAddress={{ lat: 28.6139, lng: 77.2090 }} riderLocation={{ lat: 18.519329, lng: 73.932070 }} />
     }
   ])
 
