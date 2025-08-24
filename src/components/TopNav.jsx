@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toggleCartState } from '../utils/ReduxStore/CartSlice';
 import Cart from './Cart';
 
@@ -70,22 +71,18 @@ function TopNav() {
                             </button>
                             {showProfileDropdown && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-1 z-30 transition-all duration-200 ease-out animate-fade-in-scale">
-                                    <a href="#" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
+                                    <Link to="/profile" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
                                         Profile
                                         <ChevronRight className="ml-auto w-4 h-4 text-gray-500" />
-                                    </a>
-                                    <a href="#" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
+                                    </Link>
+                                    <Link to="/orders" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
                                         My Orders
                                         <ChevronRight className="ml-auto w-4 h-4 text-gray-500" />
-                                    </a>
-                                    <a href="#" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
-                                        Settings
-                                        <ChevronRight className="ml-auto w-4 h-4 text-gray-500" />
-                                    </a>
-                                    <a href="#" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
+                                    </Link>
+                                    <Link to="/logout" className="flex items-center px-4 py-2 text-gray-800 dark:text-gray-100 hover:bg-red-50 dark:hover:bg-red-900 rounded-md mx-1 transition-colors duration-150">
                                         Logout
                                         <ChevronRight className="ml-auto w-4 h-4 text-gray-500" />
-                                    </a>
+                                    </Link>
                                 </div>
                             )}
                         </div>

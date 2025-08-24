@@ -1,8 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Logout from "./components/Account/Logout";
+import Orders from "./components/Account/Orders";
+import Profile from "./components/Account/Profile";
 import MainContainer from "./components/MainContainer";
 import Delivery from "./components/Order/Delivery";
 import DeliveryTrackingPage from "./components/Order/DeliveryGoogle";
 import TrackOrder from "./components/Order/TrackOrder";
+import Payment from "./components/Payment/Payment";
 import RestaurantMain from "./components/Restaurant/RestaurantMain";
 
 function App() {
@@ -56,6 +60,22 @@ function App() {
     }, {
       path: "/restaurant",
       element: <RestaurantMain />
+    },
+    {
+      path: "/profile",
+      element: <Profile />
+    },
+    {
+      path: "/orders",
+      element: <Orders />
+    },
+    {
+      path: "/logout",
+      element: <Logout />
+    },
+    {
+      path: "/payment",
+      element: <Payment />
     },
     {
       path: "/track-order",
